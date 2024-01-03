@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\JumbotronRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass: JumbotronRepository::class)]
+#[Vich\Uploadable]
 class Jumbotron
 {
     #[ORM\Id]
@@ -20,8 +23,11 @@ class Jumbotron
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?PicturesJumbotron $picture_jumbotron = null;
+    #[ORM\Column(length: 255)]
+    private ?string $pictureName = null;
+
+    #[Vich\UploadableField(mapping: 'pictureJumbotron', fileNameProperty: 'pictureName')]
+    private ?string $pictureFile = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -63,14 +69,26 @@ class Jumbotron
         return $this;
     }
 
-    public function getPictureJumbotronId(): ?PicturesJumbotron
+    public function getPictureName(): ?string
     {
-        return $this->picture_jumbotron;
+        return $this->pictureName;
     }
 
-    public function setPictureJumbotronId(?PicturesJumbotron $picture_jumbotron): static
+    public function setPictureName(string $pictureName): static
     {
-        $this->picture_jumbotron = $picture_jumbotron;
+        $this->pictureName = $pictureName;
+
+        return $this;
+    }
+
+    public function getPictureFile(): ?string
+    {
+        return $this->pictureFile;
+    }
+
+    public function setPictureFile(string $pictureFile): static
+    {
+        $this->pictureFile = $pictureFile;
 
         return $this;
     }

@@ -147,36 +147,36 @@ class Products
         return $this;
     }
 
-    public function getPlatformId(): ?PlatformsProducts
+    public function getPlatform(): ?PlatformsProducts
     {
         return $this->platform;
     }
 
-    public function setPlatformId(?PlatformsProducts $platform): static
+    public function setPlatform(?PlatformsProducts $platform): static
     {
         $this->platform = $platform;
 
         return $this;
     }
 
-    public function getCategoryId(): ?CategorysProducts
+    public function getCategory(): ?CategorysProducts
     {
         return $this->category;
     }
 
-    public function setCategoryId(?CategorysProducts $category): static
+    public function setCategory(?CategorysProducts $category): static
     {
         $this->category = $category;
 
         return $this;
     }
 
-    public function getGenreId(): ?GenresProducts
+    public function getGenre(): ?GenresProducts
     {
         return $this->genre;
     }
 
-    public function setGenreId(?GenresProducts $genre): static
+    public function setGenre(?GenresProducts $genre): static
     {
         $this->genre= $genre;
 

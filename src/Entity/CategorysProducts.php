@@ -70,7 +70,7 @@ class CategorysProducts
     {
         if (!$this->products_id->contains($productsId)) {
             $this->products_id->add($productsId);
-            $productsId->setCategoryId($this);
+            $productsId->setCategory($this);
         }
 
         return $this;
@@ -80,8 +80,8 @@ class CategorysProducts
     {
         if ($this->products_id->removeElement($productsId)) {
             // set the owning side to null (unless already changed)
-            if ($productsId->getCategoryId() === $this) {
-                $productsId->setCategoryId(null);
+            if ($productsId->getCategory() === $this) {
+                $productsId->setCategory(null);
             }
         }
 
