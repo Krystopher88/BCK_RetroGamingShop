@@ -13,3 +13,15 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/uploads/projects'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_remove: true
+
+        bannerNewsLetter:
+            uri_prefix: /uploads/newsletter/banner
+            upload_destination: '%kernel.project_dir%/public/uploads/projects'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_remove: true
+
+        pictureNewsLetter:
+            uri_prefix: /uploads/newsletter/pictures
+            upload_destination: '%kernel.project_dir%/public/uploads/projects'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_remove: true

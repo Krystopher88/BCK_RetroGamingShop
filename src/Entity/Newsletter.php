@@ -7,8 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass: NewsletterRepository::class)]
+#[Vich\Uploadable]
+
 class Newsletter
 {
     #[ORM\Id]
@@ -20,7 +24,19 @@ class Newsletter
     private ?string $mainTitle = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $bannerName = null;
+
+    #[Vich\UploadableField(mapping: 'bannerNewsLetter', fileNameProperty: 'bannerName')]
+    private ?string $bannerFile = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $secondaryTitle = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $pictureSecondaryName = null;
+
+    #[Vich\UploadableField(mapping: 'pictureNewsLetter', fileNameProperty: 'pictureSecondaryName')]
+    private ?string $pictureSecondaryFile = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $secondText = null;
@@ -28,20 +44,26 @@ class Newsletter
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $thirdTitle = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $pictureThirdName = null;
+
+    #[Vich\UploadableField(mapping: 'pictureNewsLetter', fileNameProperty: 'pictureThirdName')]
+    private ?string $pictureThirdFile = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $thirdText = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fourthTitle = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 255)]
+    private ?string $pictureFourthName = null;
+
+    #[Vich\UploadableField(mapping: 'pictureNewsLetter', fileNameProperty: 'pictureFourthName')]
+    private ?string $pictureFourthFile = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $fourthText = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?BannerNewsletter $banner = null;
-
-    #[ORM\OneToMany(mappedBy: 'newsletter_id', targetEntity: PicturesNewsletter::class)]
-    private Collection $pictures_id;
 
     #[ORM\OneToMany(mappedBy: 'newsletter_id', targetEntity: Users::class)]
     private Collection $subscriber_id;
@@ -51,7 +73,6 @@ class Newsletter
 
     public function __construct()
     {
-        $this->pictures_id = new ArrayCollection();
         $this->subscriber_id = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
@@ -73,6 +94,30 @@ class Newsletter
         return $this;
     }
 
+    public function getBannerName(): ?string
+    {
+        return $this->bannerName;
+    }
+
+    public function setBannerName(string $bannerName): static
+    {
+        $this->bannerName = $bannerName;
+
+        return $this;
+    }
+
+    public function getBannerFile(): ?string
+    {
+        return $this->bannerFile;
+    }
+
+    public function setBannerFile(string $bannerFile): static
+    {
+        $this->bannerFile = $bannerFile;
+
+        return $this;
+    }
+
     public function getSecondaryTitle(): ?string
     {
         return $this->secondaryTitle;
@@ -81,6 +126,30 @@ class Newsletter
     public function setSecondaryTitle(string $secondaryTitle): static
     {
         $this->secondaryTitle = $secondaryTitle;
+
+        return $this;
+    }
+
+    public function getPictureSecondaryName(): ?string
+    {
+        return $this->pictureSecondaryName;
+    }
+
+    public function setPictureSecondaryName(string $pictureSecondaryName): static
+    {
+        $this->pictureSecondaryName = $pictureSecondaryName;
+
+        return $this;
+    }
+
+    public function getPictureSecondaryFile(): ?string
+    {
+        return $this->pictureSecondaryFile;
+    }
+
+    public function setPictureSecondaryFile(string $pictureSecondaryFile): static
+    {
+        $this->pictureSecondaryFile = $pictureSecondaryFile;
 
         return $this;
     }
@@ -109,6 +178,30 @@ class Newsletter
         return $this;
     }
 
+    public function getPictureFourthName(): ?string
+    {
+        return $this->pictureFourthName;
+    }
+
+    public function setPictureFourthName(string $pictureFourthName): static
+    {
+        $this->pictureFourthName = $pictureFourthName;
+
+        return $this;
+    }
+
+    public function getPictureFourthFile(): ?string
+    {
+        return $this->pictureFourthFile;
+    }
+
+    public function setPictureFourthFile(string $pictureFourthFile): static
+    {
+        $this->pictureFourthFile = $pictureFourthFile;
+
+        return $this;
+    }
+
     public function getThirdText(): ?string
     {
         return $this->thirdText;
@@ -124,6 +217,30 @@ class Newsletter
     public function getFourthTitle(): ?string
     {
         return $this->fourthTitle;
+    }
+
+    public function getPictureThirdName(): ?string
+    {
+        return $this->pictureThirdName;
+    }
+
+    public function setPictureThirdName(string $pictureThirdName): static
+    {
+        $this->pictureThirdName = $pictureThirdName;
+
+        return $this;
+    }
+
+    public function getPictureThirdFile(): ?string
+    {
+        return $this->pictureThirdFile;
+    }
+
+    public function setPictureThirdFile(string $pictureThirdFile): static
+    {
+        $this->pictureThirdFile = $pictureThirdFile;
+
+        return $this;
     }
 
     public function setFourthTitle(?string $fourthTitle): static
@@ -145,47 +262,6 @@ class Newsletter
         return $this;
     }
 
-    public function getBannerId(): ?BannerNewsletter
-    {
-        return $this->banner;
-    }
-
-    public function setBannerId(?BannerNewsletter $banner): static
-    {
-        $this->banner = $banner;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, PicturesNewsletter>
-     */
-    public function getPicturesId(): Collection
-    {
-        return $this->pictures_id;
-    }
-
-    public function addPicturesId(PicturesNewsletter $picturesId): static
-    {
-        if (!$this->pictures_id->contains($picturesId)) {
-            $this->pictures_id->add($picturesId);
-            $picturesId->setNewsletterId($this);
-        }
-
-        return $this;
-    }
-
-    public function removePicturesId(PicturesNewsletter $picturesId): static
-    {
-        if ($this->pictures_id->removeElement($picturesId)) {
-            // set the owning side to null (unless already changed)
-            if ($picturesId->getNewsletterId() === $this) {
-                $picturesId->setNewsletterId(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Users>

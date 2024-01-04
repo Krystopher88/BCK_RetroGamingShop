@@ -6,6 +6,7 @@ use App\Entity\Users;
 use App\Entity\Coupons;
 use App\Entity\Products;
 use App\Entity\Jumbotron;
+use App\Entity\Newsletter;
 use App\Entity\GenresProducts;
 use App\Entity\CategorysProducts;
 use App\Entity\PlatformsProducts;
@@ -39,6 +40,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Produits', 'fas fa-list', Products::class);
         yield MenuItem::linkToCrud('Coupons' , 'fas fa-list', Coupons::class);
         yield MenuItem::linkToCrud('Utilisateurs' , 'fas fa-list', Users::class);
-
+        yield MenuItem::linkToCrud('Newsletter' , 'fas fa-list', Newsletter::class);
     }
 }
