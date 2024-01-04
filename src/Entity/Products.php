@@ -31,7 +31,7 @@ class Products
     #[ORM\Column]
     private ?int $stock = null;
 
-    #[ORM\OneToMany(mappedBy: 'products_id', targetEntity: PicturesProducts::class)]
+    #[ORM\OneToMany(mappedBy: 'products_id', targetEntity: PicturesProducts::class, cascade: ['persist'])]
     private Collection $picture_id;
 
     #[ORM\ManyToOne(inversedBy: 'products_id')]

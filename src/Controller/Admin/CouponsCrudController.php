@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -74,7 +75,7 @@ class CouponsCrudController extends AbstractCrudController
     {
         yield TextField::new('code', 'Code');
         yield TextField::new('description', 'Description');
-        yield TextField::new('discount', 'Réduction');
+        yield IntegerField::new('discount', 'Réduction');
         yield DateTimeField::new('validity', 'Validité');
         yield BooleanField::new('is_valid', 'Actif');
     }

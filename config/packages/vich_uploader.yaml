@@ -4,24 +4,30 @@ vich_uploader:
     mappings:
         pictureJumbotron:
             uri_prefix: /uploads/jumbotron
-            upload_destination: '%kernel.project_dir%/public/uploads/projects'
+            upload_destination: '%kernel.project_dir%/public/uploads/jumbotron'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_remove: true
         
         picturePlatsforms:
             uri_prefix: /uploads/platsforms
-            upload_destination: '%kernel.project_dir%/public/uploads/projects'
+            upload_destination: '%kernel.project_dir%/public/uploads/platsforms'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_remove: true
 
         bannerNewsLetter:
             uri_prefix: /uploads/newsletter/banner
-            upload_destination: '%kernel.project_dir%/public/uploads/projects'
+            upload_destination: '%kernel.project_dir%/public/uploads/newsletter/banner'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_remove: true
 
         pictureNewsLetter:
             uri_prefix: /uploads/newsletter/pictures
-            upload_destination: '%kernel.project_dir%/public/uploads/projects'
+            upload_destination: '%kernel.project_dir%/public/uploads/newsletter/pictures'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_remove: true
+
+        pictureProducts:
+            uri_prefix: /uploads/products
+            upload_destination: '%kernel.project_dir%/public/uploads/products'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_remove: true

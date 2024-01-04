@@ -2,8 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Platforms;
 use App\Entity\Products;
+use App\Entity\Platforms;
+use App\Form\ProductsPicturesType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -84,7 +85,9 @@ class ProductsCrudController extends AbstractCrudController
         ->setNumDecimals(2)
         ->setCurrency('EUR');
         yield IntegerField::new('stock', 'Stock disponible');
-        yield CollectionField::new('picture_id', 'Images');
+        yield CollectionField::new('picture_id', 'Images')
+            ->setEntryType(ProductsPicturesType::class)
+            ->onlyOnForms();
         yield AssociationField::new('platform', 'Plateforme');
         yield AssociationField::new('category', 'Catégorie');
         yield AssociationField::new('genre', 'Genre');

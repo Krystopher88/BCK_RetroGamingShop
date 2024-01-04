@@ -29,6 +29,11 @@ class CategorysProducts
         $this->products_id = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->category;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

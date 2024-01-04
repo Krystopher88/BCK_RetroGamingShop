@@ -29,6 +29,11 @@ class GenresProducts
         $this->products_id = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->genre;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,7 +75,7 @@ class GenresProducts
     {
         if (!$this->products_id->contains($productsId)) {
             $this->products_id->add($productsId);
-            $productsId->setGenreId($this);
+            $productsId->setGenre($this);
         }
 
         return $this;
@@ -80,8 +85,8 @@ class GenresProducts
     {
         if ($this->products_id->removeElement($productsId)) {
             // set the owning side to null (unless already changed)
-            if ($productsId->getGenreId() === $this) {
-                $productsId->setGenreId(null);
+            if ($productsId->getGenre() === $this) {
+                $productsId->setGenre(null);
             }
         }
 

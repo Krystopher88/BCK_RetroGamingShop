@@ -38,6 +38,11 @@ class PlatformsProducts
         $this->products = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->platform;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -77,11 +77,11 @@ class PlatformsProductsCrudController extends AbstractCrudController
     {
         yield TextField::new('platform', 'Plateforme');
         yield SlugField::new('slug', 'Slug')->setTargetFieldName('platform');
-        yield TextField::new(('pictureFile'), 'Image de présentation')
+        yield TextField::new(('pictureFile'), 'Logo')
             ->setFormType(VichImageType::class)
             ->onlyOnForms();
-        yield ImageField::new('pictureName', 'Image de présentation')
-            ->setBasePath('/uploads/jumbotron')
+        yield ImageField::new('pictureName', 'Logo')
+            ->setBasePath('/uploads/platsforms')
             ->onlyOnIndex();
     }
     

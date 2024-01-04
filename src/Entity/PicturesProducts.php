@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\PicturesProductsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: PicturesProductsRepository::class)]
+#[Vich\Uploadable]
 class PicturesProducts
 {
     #[ORM\Id]
@@ -16,8 +19,8 @@ class PicturesProducts
     #[ORM\Column(length: 255)]
     private ?string $pictureName = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $pictureFile = null;
+    #[Vich\UploadableField(mapping: 'pictureProducts', fileNameProperty: 'pictureName')]
+    private ?File $pictureFile = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -47,12 +50,12 @@ class PicturesProducts
         return $this;
     }
 
-    public function getPictureFile(): ?string
+    public function getPictureFile(): ?File
     {
         return $this->pictureFile;
     }
 
-    public function setPictureFile(string $pictureFile): static
+    public function setPictureFile(?File $pictureFile): static
     {
         $this->pictureFile = $pictureFile;
 
