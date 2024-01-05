@@ -24,8 +24,8 @@ class JumbotronRepository extends ServiceEntityRepository
     public function findPublishedJumbotron()
     {
         return $this->createQueryBuilder('j')
-            ->andWhere('j.published = :published')
-            ->setParameter('published', true)
+            ->andWhere('j.is_publish = :isPublish')
+            ->setParameter('isPublish', true)
             ->getQuery()
             ->getResult()
         ;
